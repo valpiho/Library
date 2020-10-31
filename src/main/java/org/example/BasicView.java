@@ -21,6 +21,16 @@ public class BasicView {
     private TextArea auTextAreaForAll;
     //authorTab//
     //customerTab//
-   /* @FXML
-    private TextField*/
+    @FXML
+    private TextField cuBookNameForBorrowAndReturnAndEdit, cuReviewForCreateAndEdit, cuBookNameForGetReviewAndReviews,
+                        cuBookNameForDelete;
+
+    @FXML
+    private Button cuBorrowBook, cuReturnBook, cuCreateReview, cuEditReview, cuGetBookReview, cuGetBooksReview,
+                    cuDeleteBookReview;
+
+    @FXML
+    private TextArea cuTextAreaForAll;
+
+
 }

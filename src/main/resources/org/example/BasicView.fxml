@@ -40,18 +40,18 @@
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TextField layoutX="34.0" layoutY="29.0" prefHeight="46.0" prefWidth="273.0" promptText="book name" />
-                              <Button layoutX="338.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="151.0" text="Borrow" />
-                              <Button layoutX="518.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="151.0" text="Return" />
-                              <TextField layoutX="34.0" layoutY="96.0" prefHeight="42.0" prefWidth="638.0" promptText="review" />
-                              <Button layoutX="693.0" layoutY="94.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="97.0" text="Create review" />
-                              <Button layoutX="815.0" layoutY="96.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="97.0" text="Edit review" />
-                              <TextArea layoutX="34.0" layoutY="158.0" prefHeight="397.0" prefWidth="483.0" />
-                              <Button layoutX="542.0" layoutY="158.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="151.0" text="Get book review" />
-                              <TextField layoutX="721.0" layoutY="159.0" prefHeight="45.0" prefWidth="212.0" promptText="book name" />
-                              <Button layoutX="542.0" layoutY="224.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="151.0" text="Get all books reviews" />
-                              <Button layoutX="542.0" layoutY="293.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="151.0" text="Delete book review" />
-                              <TextField layoutX="721.0" layoutY="294.0" prefHeight="45.0" prefWidth="212.0" promptText="book name" />
+                              <TextField fx:id="cuBookNameForBorrowAndReturnAndEdit" layoutX="34.0" layoutY="29.0" prefHeight="46.0" prefWidth="273.0" promptText="book name" />
+                              <Button fx:id="cuBorrowBook" layoutX="338.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="151.0" text="Borrow" />
+                              <Button fx:id="cuReturnBook" layoutX="518.0" layoutY="29.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="151.0" text="Return" />
+                              <TextField fx:id="cuReviewForCreateAndEdit" layoutX="34.0" layoutY="96.0" prefHeight="42.0" prefWidth="638.0" promptText="review" />
+                              <Button fx:id="cuCreateReview" layoutX="693.0" layoutY="94.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="97.0" text="Create review" />
+                              <Button fx:id="cuEditReview" layoutX="815.0" layoutY="96.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="97.0" text="Edit review" />
+                              <TextArea fx:id="cuTextAreaForAll" layoutX="34.0" layoutY="158.0" prefHeight="397.0" prefWidth="483.0" />
+                              <Button fx:id="cuGetBookReview" layoutX="542.0" layoutY="158.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="151.0" text="Get book review" />
+                              <TextField fx:id="cuBookNameForGetReviewAndReviews" layoutX="721.0" layoutY="159.0" prefHeight="45.0" prefWidth="212.0" promptText="book name" />
+                              <Button fx:id="cuGetBooksReview" layoutX="542.0" layoutY="224.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="151.0" text="Get all books reviews" />
+                              <Button fx:id="cuDeleteBookReview" layoutX="542.0" layoutY="293.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="151.0" text="Delete book review" />
+                              <TextField fx:id="cuBookNameForDelete" layoutX="721.0" layoutY="294.0" prefHeight="45.0" prefWidth="212.0" promptText="book name" />
                            </children>
                         </AnchorPane>
                      </content>
