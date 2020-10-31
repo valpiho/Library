@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class BasicView {
 
+    //FXMLs//
     //authorTab//
     @FXML
     private TextField auBookNameForCreate, auBookDescForCreate, auBookNameForEdit, auBookDescForEdit,
@@ -52,6 +53,9 @@ public class BasicView {
     @FXML
     private Button regCreateAuthor, regCreateCustomer;
     //registrationTab//
+    //FXMLs//
+
+
 
 
 }
