@@ -60,9 +60,9 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextArea layoutX="47.0" layoutY="41.0" prefHeight="342.0" prefWidth="488.0" />
-                              <TextField layoutX="572.0" layoutY="41.0" prefHeight="35.0" prefWidth="250.0" promptText="enter book name" />
-                              <Button layoutX="740.0" layoutY="106.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="194.0" text="Check for reviews" />
+                              <TextArea fx:id="revTextAreaForReviews" layoutX="47.0" layoutY="41.0" prefHeight="342.0" prefWidth="488.0" />
+                              <TextField fx:id="revBookNameForReviews" layoutX="572.0" layoutY="41.0" prefHeight="35.0" prefWidth="250.0" promptText="enter book name" />
+                              <Button fx:id="revCheckForReviews" layoutX="740.0" layoutY="106.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="194.0" text="Check for reviews" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -71,12 +71,12 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextField layoutX="77.0" layoutY="72.0" prefHeight="27.0" prefWidth="231.0" promptText="first name" />
-                              <TextField layoutX="334.0" layoutY="72.0" prefHeight="27.0" prefWidth="231.0" promptText="last name" />
-                              <TextField layoutX="77.0" layoutY="141.0" prefHeight="27.0" prefWidth="231.0" promptText="first name" />
-                              <TextField layoutX="334.0" layoutY="141.0" prefHeight="27.0" prefWidth="231.0" promptText="last name" />
-                              <Button layoutX="606.0" layoutY="73.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="179.0" text="Create Author" />
-                              <Button layoutX="606.0" layoutY="141.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="179.0" text="Create Customer" />
+                              <TextField fx:id="regAuthorFirstName" layoutX="77.0" layoutY="72.0" prefHeight="27.0" prefWidth="231.0" promptText="first name" />
+                              <TextField fx:id="regAuthorLastName" layoutX="334.0" layoutY="72.0" prefHeight="27.0" prefWidth="231.0" promptText="last name" />
+                              <TextField fx:id="regCustomerFirstName" layoutX="77.0" layoutY="141.0" prefHeight="27.0" prefWidth="231.0" promptText="first name" />
+                              <TextField fx:id="regCustomerLastName" layoutX="334.0" layoutY="141.0" prefHeight="27.0" prefWidth="231.0" promptText="last name" />
+                              <Button fx:id="regCreateAuthor" layoutX="606.0" layoutY="73.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="179.0" text="Create Author" />
+                              <Button fx:id="regCreateCustomer" layoutX="606.0" layoutY="141.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="179.0" text="Create Customer" />
                            </children>
                         </AnchorPane>
                     </content>

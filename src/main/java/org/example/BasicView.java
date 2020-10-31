@@ -20,6 +20,7 @@ public class BasicView {
     @FXML
     private TextArea auTextAreaForAll;
     //authorTab//
+
     //customerTab//
     @FXML
     private TextField cuBookNameForBorrowAndReturnAndEdit, cuReviewForCreateAndEdit, cuBookNameForGetReviewAndReviews,
@@ -31,6 +32,26 @@ public class BasicView {
 
     @FXML
     private TextArea cuTextAreaForAll;
+    //customerTab//
+
+    //reviewsTab//
+    @FXML
+    private  TextField revBookNameForReviews;
+
+    @FXML
+    private Button revCheckForReviews;
+
+    @FXML
+    private TextArea revTextAreaForReviews;
+    //reviewsTab//
+
+    //registrationTab//
+    @FXML
+    private TextField regAuthorFirstName, regAuthorLastName, regCustomerFirstName, regCustomerLastName;
+
+    @FXML
+    private Button regCreateAuthor, regCreateCustomer;
+    //registrationTab//
 
 
 }
