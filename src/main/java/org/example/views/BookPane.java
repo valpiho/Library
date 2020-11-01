@@ -44,18 +44,18 @@ public class BookPane{
         descriptionColumn.setMinWidth(200);
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        /*bookTableView.setItems(getAllBooks());
-        bookTableView.getColumns().addAll(nameColumn, authorColumn, descriptionColumn);*/
+        bookTableView.setItems(getAllBooks());
+        bookTableView.getColumns().addAll(nameColumn, authorColumn, descriptionColumn);
 
         borderPane.setLeft(bookTableView);
 
         return borderPane;
     }
 
-   /* private ObservableList<Book> getAllBooks() {
+    private ObservableList<Book> getAllBooks() {
 
         ObservableList<Book> books = FXCollections.observableArrayList();
         books.addAll(bookService.getAllBooks());
         return books;
-    }*/
+    }
 }
