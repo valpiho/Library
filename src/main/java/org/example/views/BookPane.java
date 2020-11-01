@@ -35,15 +35,15 @@ public class BookPane{
         descriptionColumn.setMinWidth(200);
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        bookTableView.setItems(getAllBooks());
-        bookTableView.getColumns().addAll(nameColumn, authorColumn, descriptionColumn);
+        /*bookTableView.setItems(getAllBooks());
+        bookTableView.getColumns().addAll(nameColumn, authorColumn, descriptionColumn);*/
 
         borderPane.setLeft(bookTableView);
 
         return borderPane;
     }
 
-    private ObservableList<Book> getAllBooks() {
+   /* private ObservableList<Book> getAllBooks() {
 
         Author author1 = new Author("Val", "Piho");
         Author author2 = new Author("John", "Doe");
@@ -59,5 +59,5 @@ public class BookPane{
                 author3.getFullName(),
                 "Some interesting book of JavaFX"));
         return books;
-    }
+    }*/
 }
