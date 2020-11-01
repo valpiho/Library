@@ -1,32 +1,45 @@
 package org.example;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import org.example.views.AuthorPane;
+import org.example.views.BookPane;
 
-import java.io.IOException;
-
-/**
- * JavaFX App
- */
 public class App extends Application {
+    public static void main(String[] args) {
+        launch(args);
+    }
 
-    private static Scene scene;
+    BookPane bookPane = new BookPane();
+    AuthorPane authorPane = new AuthorPane();
 
     @Override
-    public void start(Stage stage) throws IOException {
-        Parent fxmlLoader = new FXMLLoader().load(getClass().getResource("BasicView.fxml"));
-        scene = new Scene(fxmlLoader);
+    public void start(Stage stage){
+
+        TabPane tabs = new TabPane();
+
+        Tab bookTab = new Tab();
+        bookTab.setText("Books");
+        bookTab.setContent(bookPane.booksSample());
+
+        Tab authorTab = new Tab();
+        authorTab.setText("Authors");
+        authorTab.setContent(authorPane.authorSample());
+
+        Tab clientTab = new Tab();
+        authorTab.setText("Clients");
+        authorTab.setContent(null);
+
+        tabs.getTabs().addAll(bookTab, authorTab, clientTab);
+
+        Scene scene = new Scene(tabs, 650,500);
+        stage.setTitle("library");
         stage.setScene(scene);
         stage.show();
     }
 
-
-
-    public static void main(String[] args) {
-        launch();
-    }
 
 }
