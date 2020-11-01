@@ -3,10 +3,12 @@ package org.example.views;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import org.example.entity.Author;
 import org.example.entity.Book;
@@ -26,6 +28,8 @@ public class BookPane{
         BorderPane borderPane = new BorderPane();
         borderPane.setPadding(new Insets(20, 0, 20, 20));
 
+        borderPane.setBottom(addHBox());
+
         TableView<Book> bookTableView = new TableView<>();
         bookTableView.setEditable(true);
 
@@ -44,7 +48,7 @@ public class BookPane{
         descriptionColumn.setMinWidth(200);
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        bookTableView.setItems(getAllBooks());
+        // bookTableView.setItems(getAllBooks());
         bookTableView.getColumns().addAll(nameColumn, authorColumn, descriptionColumn);
 
         borderPane.setLeft(bookTableView);
@@ -52,8 +56,23 @@ public class BookPane{
         return borderPane;
     }
 
-    private ObservableList<Book> getAllBooks() {
+    public HBox addHBox() {
+        HBox hBox = new HBox();
+        hBox.setPadding(new Insets(15, 12, 15, 12));
+        hBox.setSpacing(10);
 
+        Button buttonCreate = new Button("Create book");
+        buttonCreate.setPrefSize(100, 20);
+
+        Button buttonEdit = new Button("Edit book");
+        buttonEdit.setPrefSize(100, 20);
+
+        Button buttonDelete = new Button("Delete book");
+        hBox.getChildren().addAll(buttonCreate, buttonEdit, buttonDelete);
+        return hBox;
+    }
+
+    private ObservableList<Book> getAllBooks() {
         ObservableList<Book> books = FXCollections.observableArrayList();
         books.addAll(bookService.getAllBooks());
         return books;
