@@ -1,26 +1,64 @@
 package org.example.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class Book {
 
+    @Id
     private int id;
     private String name;
-    private String authorName;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id")
+    private Author author;
+
     private String description;
+
+    @OneToOne(mappedBy = "bookBor")
+    private Borrowed borrowed;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.DATE)
     private Date createdAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.DATE)
     private Date editedAt;
+
     private boolean isBorrowed;
+
+    @OneToMany(mappedBy = "BookRev", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Review> reviewList;
 
     public Book() {}
 
-    public Book(String name, String authorName, String description) {
+    public Book(String name, Author author, String description) {
         this.name = name;
-        this.authorName = authorName;
+        this.author = author;
         this.description = description;
+    }
+
+    public Borrowed getBorrowed() {
+        return borrowed;
+    }
+
+    public void setBorrowed(Borrowed borrowed) {
+        this.borrowed = borrowed;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public int getId() {
@@ -37,14 +75,6 @@ public class Book {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
     }
 
     public String getDescription() {
@@ -99,7 +129,7 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", author=" + authorName +
+//                ", author=" + authorName +
                 ", description='" + description + '\'' +
                 ", createdAt=" + createdAt +
                 ", editedAt=" + editedAt +

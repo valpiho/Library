@@ -1,17 +1,36 @@
 package org.example.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class Customer {
 
+    @Id
     private int id;
     private String firstName;
     private String lastName;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.DATE)
     private Date createdAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.DATE)
     private Date editedAt;
+
+    @OneToOne(mappedBy = "customerBor")
+    private Borrowed borrowed;
+
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Book> bookList;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Review> reviewList;
 
     public Customer() {}
@@ -19,6 +38,14 @@ public class Customer {
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Borrowed getBorrowed() {
+        return borrowed;
+    }
+
+    public void setBorrowed(Borrowed borrowed) {
+        this.borrowed = borrowed;
     }
 
     public int getId() {

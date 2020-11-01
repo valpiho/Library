@@ -1,12 +1,23 @@
 package org.example.entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class Review {
 
+    @Id
     private int id;
     private String description;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_id")
+    private Book bookRev;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
+
     private Date createdAt;
     private Date editedAt;
 

@@ -1,16 +1,21 @@
 package org.example.entity;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class Author {
 
+    @Id
     private int id;
     private String firstName;
     private String lastName;
     private Date createdAt;
     private Date editedAt;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Book> bookList;
 
     public Author() {}
