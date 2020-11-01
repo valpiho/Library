@@ -11,6 +11,7 @@ import java.util.Date;
 public class Borrowed {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @OneToOne
