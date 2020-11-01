@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="lib" />
         <module name="LibrarySdna" />
+        <module name="library" />
       </profile>
     </annotationProcessing>
   </component>

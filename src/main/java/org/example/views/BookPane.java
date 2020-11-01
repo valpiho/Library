@@ -10,8 +10,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import org.example.entity.Author;
 import org.example.entity.Book;
+import org.example.service.BookService;
 
 public class BookPane{
+
+    private BookService bookService;
+
+    public BookPane() {}
+
+    public BookPane(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     public Pane booksSample() {
         BorderPane borderPane = new BorderPane();
@@ -45,19 +54,8 @@ public class BookPane{
 
     private ObservableList<Book> getAllBooks() {
 
-        Author author1 = new Author("Val", "Piho");
-        Author author2 = new Author("John", "Doe");
-        Author author3 = new Author("Mary", "Jane");
         ObservableList<Book> books = FXCollections.observableArrayList();
-        books.add(new Book("Java from Scratch",
-                author1.getFullName(),
-                "Some interesting book of Java"));
-        books.add(new Book("Spring from Scratch",
-                author2.getFullName(),
-                "Some interesting book of Spring"));
-        books.add(new Book("JavaFX from Scratch",
-                author3.getFullName(),
-                "Some interesting book of JavaFX"));
+        books.addAll(bookService.getAllBooks());
         return books;
     }
 }
