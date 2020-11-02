@@ -19,8 +19,7 @@ public class Author {
     private Date createdAt;
     private Date editedAt;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "author")
     private List<Book> bookList;
 
     public Author() {}
