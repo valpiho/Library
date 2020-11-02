@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.entity.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,8 +23,12 @@ public class HibernateUtil {
     public static void loadSessionFactory(){
 
         Configuration configuration = new Configuration();
-        configuration.configure("/hibernate.cfg.xml");
-//        configuration.addAnnotatedClass(Employee.class);
+        configuration.configure("hibernate.cfg.xml");
+        configuration.addAnnotatedClass(Author.class);
+        configuration.addAnnotatedClass(Book.class);
+        configuration.addAnnotatedClass(Borrowed.class);
+        configuration.addAnnotatedClass(Customer.class);
+        configuration.addAnnotatedClass(Review.class);
         ServiceRegistry srvcReg = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         sessionFactory = configuration.buildSessionFactory(srvcReg);
     }

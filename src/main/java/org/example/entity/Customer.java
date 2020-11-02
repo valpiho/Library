@@ -12,7 +12,7 @@ import java.util.List;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String firstName;
     private String lastName;
@@ -29,7 +29,7 @@ public class Customer {
     private Borrowed borrowed;
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Book> bookList;
+    private List<Borrowed> bookList;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Review> reviewList;
@@ -39,6 +39,14 @@ public class Customer {
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public List<Borrowed> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Borrowed> bookList) {
+        this.bookList = bookList;
     }
 
     public Borrowed getBorrowed() {
@@ -89,14 +97,6 @@ public class Customer {
         this.editedAt = editedAt;
     }
 
-    public List<Book> getBookList() {
-        return bookList;
-    }
-
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
-    }
-
     public List<Review> getReviewList() {
         return reviewList;
     }
@@ -112,12 +112,12 @@ public class Customer {
         reviewList.add(review);
     }
 
-    public void addBook(Book book) {
+   /* public void addBook(Book book) {
         if (bookList == null) {
             bookList = new ArrayList<>();
         }
         bookList.add(book);
-    }
+    }*/
 
     @Override
     public String toString() {

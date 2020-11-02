@@ -7,7 +7,7 @@ import java.util.Date;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String description;
 
@@ -24,9 +24,18 @@ public class Review {
 
     public Review() {}
 
-    public Review(String description, Customer customer) {
+    public Review(String description, Book bookRev, Customer customer) {
         this.description = description;
+        this.bookRev = bookRev;
         this.customer = customer;
+    }
+
+    public Book getBookRev() {
+        return bookRev;
+    }
+
+    public void setBookRev(Book bookRev) {
+        this.bookRev = bookRev;
     }
 
     public int getId() {

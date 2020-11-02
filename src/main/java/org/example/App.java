@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.entity.Author;
+import org.hibernate.Session;
+
 
 import java.io.IOException;
 
@@ -14,6 +17,9 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+
+
+
 
     @Override
     public void start(Stage stage) throws IOException {

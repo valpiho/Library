@@ -12,6 +12,7 @@ import java.util.List;
 public class Book {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
 
@@ -34,7 +35,7 @@ public class Book {
 
     private boolean isBorrowed;
 
-    @OneToMany(mappedBy = "BookRev", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bookRev", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Review> reviewList;
 
     public Book() {}
