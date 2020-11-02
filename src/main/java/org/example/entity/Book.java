@@ -16,11 +16,12 @@ public class Book {
     private int id;
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+/*    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
-
+*/
     private String description;
+/*
 
     @OneToOne(mappedBy = "bookBor")
     private Borrowed borrowed;
@@ -37,15 +38,15 @@ public class Book {
 
     @OneToMany(mappedBy = "BookRev", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Review> reviewList;
+*/
 
     public Book() {}
 
-    public Book(String name, Author author, String description) {
+    public Book(String name, String description) {
         this.name = name;
-        this.author = author;
         this.description = description;
     }
-
+/*
     public Borrowed getBorrowed() {
         return borrowed;
     }
@@ -60,7 +61,7 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
-    }
+    }*/
 
     public int getId() {
         return id;
@@ -86,7 +87,7 @@ public class Book {
         this.description = description;
     }
 
-    public Date getCreatedAt() {
+    /*public Date getCreatedAt() {
         return createdAt;
     }
 
@@ -124,7 +125,7 @@ public class Book {
         }
         reviewList.add(review);
     }
-
+*/
     @Override
     public String toString() {
         return "Book{" +
@@ -132,10 +133,10 @@ public class Book {
                 ", name='" + name + '\'' +
 //                ", author=" + authorName +
                 ", description='" + description + '\'' +
-                ", createdAt=" + createdAt +
+                /*", createdAt=" + createdAt +
                 ", editedAt=" + editedAt +
                 ", isBorrowed=" + isBorrowed +
-                ", reviewList=" + reviewList +
+                ", reviewList=" + reviewList +*/
                 '}';
     }
 }

@@ -10,19 +10,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import org.example.entity.Author;
 import org.example.entity.Book;
-import org.example.service.BookService;
+import org.example.service.BookServiceImpl;
 
 public class BookPane{
 
-    private BookService bookService;
+    private final BookServiceImpl bookServiceImpl = new BookServiceImpl();
 
     public BookPane() {}
-
-    public BookPane(BookService bookService) {
-        this.bookService = bookService;
-    }
 
     public Pane booksSample() {
         BorderPane borderPane = new BorderPane();
@@ -38,18 +33,13 @@ public class BookPane{
         nameColumn.setMinWidth(200);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        // Author Column
-        TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
-        authorColumn.setMinWidth(200);
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("authorName"));
-
         // Description Column
         TableColumn<Book, String> descriptionColumn = new TableColumn<>("Description");
         descriptionColumn.setMinWidth(200);
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        // bookTableView.setItems(getAllBooks());
-        bookTableView.getColumns().addAll(nameColumn, authorColumn, descriptionColumn);
+        bookTableView.setItems(getAllBooks());
+        bookTableView.getColumns().addAll(nameColumn, descriptionColumn);
 
         borderPane.setLeft(bookTableView);
 
@@ -74,7 +64,8 @@ public class BookPane{
 
     private ObservableList<Book> getAllBooks() {
         ObservableList<Book> books = FXCollections.observableArrayList();
-        books.addAll(bookService.getAllBooks());
+        books.add(bookServiceImpl.getBook(1));
+        System.out.println(books);
         return books;
     }
 }

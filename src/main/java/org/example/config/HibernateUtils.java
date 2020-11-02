@@ -23,16 +23,12 @@ public class HibernateUtils {
                 settings.put(Environment.URL,
                         "jdbc:mysql://localhost:3306/library?serverTimezone=UTC");
                 settings.put(Environment.USER, "root");
-                settings.put(Environment.PASS, "123456");
+                settings.put(Environment.PASS, "root");
                 settings.put(Environment.DIALECT,
                         "org.hibernate.dialect.MySQL5Dialect");
                 settings.put(Environment.SHOW_SQL, "true");
-                settings.put(Environment.HBM2DDL_AUTO, "true");
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(Book.class);
-                configuration.addAnnotatedClass(Author.class);
-                configuration.addAnnotatedClass(Customer.class);
-                configuration.addAnnotatedClass(Review.class);
                 ServiceRegistry serviceRegistry = new
                         StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
                 sessionFactory =

@@ -30,8 +30,8 @@ public class App extends Application {
         authorTab.setContent(authorPane.authorSample());
 
         Tab clientTab = new Tab();
-        authorTab.setText("Clients");
-        authorTab.setContent(null);
+        clientTab.setText("Clients");
+        clientTab.setContent(null);
 
         tabs.getTabs().addAll(bookTab, authorTab, clientTab);
 

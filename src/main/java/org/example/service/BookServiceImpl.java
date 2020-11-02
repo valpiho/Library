@@ -1,36 +1,49 @@
 package org.example.service;
 
-import org.example.dao.BookDAO;
-import org.example.dao.BookDAOImpl;
+import org.example.config.HibernateUtils;
 import org.example.entity.Book;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl{
 
-    private final BookDAO bookDAO;
-
-    public BookServiceImpl(BookDAO bookDAO) {
-        this.bookDAO = bookDAO;
-    }
-
-    @Override
     public Book getBook(int id) {
-        return bookDAO.getBook(id);
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Book book = session.find(Book.class, id);
+        session.close();
+        return book;
     }
 
-    @Override
-    public List<Book> getAllBooks() {
-        return bookDAO.getAllBooks();
+
+    /*public List<Book> getAllBooks() {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Query<Book> bookQuery = session.createQuery("from Book");
+        List<Book> bookList = bookQuery.getResultList();
+        session.close();
+        return bookList;
     }
 
-    @Override
     public void addBook(Book book) {
-        bookDAO.addBook(book);
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.saveOrUpdate(book);
+        transaction.commit();
+        session.close();
     }
 
-    @Override
     public void deleteBook(int id) {
-        bookDAO.deleteBook(id);
-    }
+        Session session = HibernateUtils.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        Book book = session.find(Book.class, id);
+        if (book != null){
+            session.delete(book);
+        }
+        transaction.commit();
+        session.close();
+    }*/
 }
