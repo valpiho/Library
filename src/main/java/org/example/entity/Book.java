@@ -1,6 +1,8 @@
 package org.example.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -36,6 +38,7 @@ public class Book {
     private boolean isBorrowed;
 
     @OneToMany(mappedBy = "bookRev", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Review> reviewList;
 
     public Book() {}

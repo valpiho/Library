@@ -1,5 +1,8 @@
 package org.example.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +20,7 @@ public class Author {
     private Date editedAt;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Book> bookList;
 
     public Author() {}
