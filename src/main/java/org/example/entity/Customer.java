@@ -27,14 +27,13 @@ public class Customer {
     @Temporal(TemporalType.DATE)
     private Date editedAt;
 
-    @OneToOne(mappedBy = "customerBor")
-    private Borrowed borrowed;
+//    @OneToOne(mappedBy = "customerBor")
+//    private Borrowed borrowed;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Borrowed> bookList;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Review> reviewList;
 
@@ -53,13 +52,13 @@ public class Customer {
         this.bookList = bookList;
     }
 
-    public Borrowed getBorrowed() {
-        return borrowed;
-    }
-
-    public void setBorrowed(Borrowed borrowed) {
-        this.borrowed = borrowed;
-    }
+//    public Borrowed getBorrowed() {
+//        return borrowed;
+//    }
+//
+//    public void setBorrowed(Borrowed borrowed) {
+//        this.borrowed = borrowed;
+//    }
 
     public int getId() {
         return id;
