@@ -1,17 +1,14 @@
-package org.example.service;
+package org.example.dao;
 
 import org.example.config.HibernateUtils;
 import org.example.entity.Book;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class BookServiceImpl{
-
+public class BookDAO{
     public Book getBook(int id) {
         Session session = HibernateUtils.getSessionFactory().openSession();
         Book book = session.find(Book.class, id);
@@ -20,7 +17,7 @@ public class BookServiceImpl{
     }
 
 
-    /*public List<Book> getAllBooks() {
+    public List<Book> getAllBooks() {
         Session session = HibernateUtils.getSessionFactory().openSession();
         Query<Book> bookQuery = session.createQuery("from Book");
         List<Book> bookList = bookQuery.getResultList();
@@ -45,5 +42,5 @@ public class BookServiceImpl{
         }
         transaction.commit();
         session.close();
-    }*/
+    }
 }

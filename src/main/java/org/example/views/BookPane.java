@@ -1,21 +1,20 @@
 package org.example.views;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import org.example.entity.Book;
-import org.example.service.BookServiceImpl;
+import org.example.service.BookService;
 
 public class BookPane{
 
-    private final BookServiceImpl bookServiceImpl = new BookServiceImpl();
+    private final BookService bookService = new BookService();
+    private final TableView<Book> bookTableView = new TableView<>();
 
     public BookPane() {}
 
@@ -23,10 +22,7 @@ public class BookPane{
         BorderPane borderPane = new BorderPane();
         borderPane.setPadding(new Insets(20, 0, 20, 20));
 
-        borderPane.setBottom(addHBox());
 
-        TableView<Book> bookTableView = new TableView<>();
-        bookTableView.setEditable(true);
 
         // Name Column
         TableColumn<Book, String> nameColumn = new TableColumn<>("Name");
@@ -38,34 +34,33 @@ public class BookPane{
         descriptionColumn.setMinWidth(200);
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        bookTableView.setItems(getAllBooks());
-        bookTableView.getColumns().addAll(nameColumn, descriptionColumn);
-
-        borderPane.setLeft(bookTableView);
-
-        return borderPane;
-    }
-
-    public HBox addHBox() {
+        // Buttons
         HBox hBox = new HBox();
         hBox.setPadding(new Insets(15, 12, 15, 12));
         hBox.setSpacing(10);
 
         Button buttonCreate = new Button("Create book");
         buttonCreate.setPrefSize(100, 20);
+        buttonCreate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                bookService.addBookWindow(hBox);
+                bookTableView.setItems(bookService.getAllBooks());
+            }
+        });
 
         Button buttonEdit = new Button("Edit book");
         buttonEdit.setPrefSize(100, 20);
 
         Button buttonDelete = new Button("Delete book");
         hBox.getChildren().addAll(buttonCreate, buttonEdit, buttonDelete);
-        return hBox;
-    }
 
-    private ObservableList<Book> getAllBooks() {
-        ObservableList<Book> books = FXCollections.observableArrayList();
-        books.add(bookServiceImpl.getBook(1));
-        System.out.println(books);
-        return books;
+        bookTableView.setEditable(true);
+        bookTableView.setItems(bookService.getAllBooks());
+        bookTableView.getColumns().addAll(nameColumn, descriptionColumn);
+
+        borderPane.setLeft(bookTableView);
+        borderPane.setBottom(hBox);
+        return borderPane;
     }
 }

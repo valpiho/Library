@@ -25,7 +25,7 @@ public class HibernateUtils {
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "root");
                 settings.put(Environment.DIALECT,
-                        "org.hibernate.dialect.MySQL5Dialect");
+                        "org.hibernate.dialect.MySQL8Dialect");
                 settings.put(Environment.SHOW_SQL, "true");
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(Book.class);
