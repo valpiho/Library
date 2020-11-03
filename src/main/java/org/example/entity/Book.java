@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import org.example.Dao.AuthorDao;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -127,17 +128,18 @@ public class Book {
         reviewList.add(review);
     }
 
+
     @Override
     public String toString() {
-        return "Book{" +
+
+        return
                 "id=" + id +
                 ", name='" + name + '\'' +
-//                ", author=" + authorName +
+                ", author=" + author.getFirstName() +
                 ", description='" + description + '\'' +
                 ", createdAt=" + createdAt +
                 ", editedAt=" + editedAt +
                 ", isBorrowed=" + isBorrowed +
-                ", reviewList=" + reviewList +
-                '}';
+                ", reviewList=" + reviewList;
     }
 }

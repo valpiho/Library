@@ -27,6 +27,8 @@ public class App extends Application {
         scene = new Scene(fxmlLoader);
         stage.setScene(scene);
         stage.show();
+//        BasicView basicView = new BasicView();
+//        basicView.run();
     }
 
 

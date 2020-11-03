@@ -19,7 +19,7 @@ public class Author {
     private Date createdAt;
     private Date editedAt;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
     private List<Book> bookList;
 
     public Author() {}
