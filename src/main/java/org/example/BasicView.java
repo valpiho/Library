@@ -10,9 +10,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.example.Dao.AuthorDao;
 import org.example.Dao.BookDao;
+import org.example.Dao.BorrowedDao;
 import org.example.Dao.CustomerDao;
 import org.example.entity.Author;
 import org.example.entity.Book;
+import org.example.entity.Borrowed;
 import org.example.entity.Customer;
 
 import java.util.ArrayList;
@@ -35,8 +37,8 @@ public class BasicView {
 
     //customerTab//
     @FXML
-    private TextField cuBookNameForBorrowAndReturnAndEdit, cuReviewForCreateAndEdit, cuBookNameForGetReviewAndReviews,
-                        cuBookNameForDelete;
+    private TextField cuBookNameForBorrowAndReturnAndEdit, cuReviewForCreateAndEdit, cuAuthorNameForGetReviewAndReviews,
+                        cuBookNameForDelete, cuIdForAll;
 
     @FXML
     private Button cuBorrowBook, cuReturnBook, cuCreateReview, cuEditReview, cuGetBookReview, cuGetBooksReview,
@@ -73,6 +75,7 @@ public class BasicView {
     BookDao bookDao = new BookDao();
     AuthorDao authorDao = new AuthorDao();
     CustomerDao customerDao = new CustomerDao();
+    BorrowedDao borrowedDao = new BorrowedDao();
 
     //registrationTab//
 
@@ -152,6 +155,46 @@ public class BasicView {
     }
 
     //AuthorTab//
+
+    //CustomerTab//
+
+    public void borrowBook() {
+        Book book = bookDao.getBookByName(cuBookNameForBorrowAndReturnAndEdit.getText());
+        Customer customer = customerDao.getAllCustomers().get(Integer.parseInt(cuIdForAll.getText()) - 1);
+        Borrowed borrowed = new Borrowed(book, customer);
+        borrowedDao.borrowBook(borrowed);
+    }
+
+    public void returnBook() {
+        Book book = bookDao.getBookByName(cuBookNameForBorrowAndReturnAndEdit.getText());
+        Customer customer = customerDao.getAllCustomers().get(Integer.parseInt(cuIdForAll.getText()) - 1);
+        Borrowed borrowed = new Borrowed(book, customer);
+        borrowedDao.returned(borrowed);
+       /* List<Borrowed> borroweds = customer.getBookList();
+        borroweds.remove(borrowed.getId());
+        customer.setBookList(borroweds);
+        customerDao.updateCustomer(customer);*/
+    }
+
+    public void createReview() {
+        //todo
+    }
+
+    public void editReview() {
+        //todo
+    }
+
+    public void getCustomerReviews() {
+        //todo
+    }
+
+    public void deleteBookReview() {
+        //todo
+    }
+
+
+
+    //CustomerTab//
 
 
 }

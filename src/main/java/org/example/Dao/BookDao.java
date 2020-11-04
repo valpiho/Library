@@ -70,5 +70,12 @@ public class BookDao {
         }
     }
 
+    public Book getBookByName(String name) {
+        Session session = HibernateUtil.getSession();
+        Book book = session.createQuery("from Book where name = :name", Book.class).setParameter("name", name).getSingleResult();
+        session.close();
+        return book;
+    }
+
 
 }

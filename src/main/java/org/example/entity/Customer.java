@@ -30,7 +30,7 @@ public class Customer {
 //    @OneToOne(mappedBy = "customerBor")
 //    private Borrowed borrowed;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
     private List<Borrowed> bookList;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.ALL)
