@@ -1,9 +1,5 @@
 package org.example.config;
 
-import org.example.entity.Author;
-import org.example.entity.Book;
-import org.example.entity.Customer;
-import org.example.entity.Review;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

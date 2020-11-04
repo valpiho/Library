@@ -1,8 +1,9 @@
 package org.example.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,13 +26,14 @@ public class Customer {
     @Temporal(TemporalType.DATE)
     private Date editedAt;
 
-    @OneToOne(mappedBy = "customerBor")
-    private Borrowed borrowed;
+//    @OneToOne(mappedBy = "customerBor")
+//    private Borrowed borrowed;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Book> bookList;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Borrowed> bookList;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Review> reviewList;
 
     public Customer() {}
@@ -41,13 +43,21 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public Borrowed getBorrowed() {
-        return borrowed;
+    public List<Borrowed> getBookList() {
+        return bookList;
     }
 
-    public void setBorrowed(Borrowed borrowed) {
-        this.borrowed = borrowed;
+    public void setBookList(List<Borrowed> bookList) {
+        this.bookList = bookList;
     }
+
+//    public Borrowed getBorrowed() {
+//        return borrowed;
+//    }
+//
+//    public void setBorrowed(Borrowed borrowed) {
+//        this.borrowed = borrowed;
+//    }
 
     public int getId() {
         return id;
@@ -89,14 +99,6 @@ public class Customer {
         this.editedAt = editedAt;
     }
 
-    public List<Book> getBookList() {
-        return bookList;
-    }
-
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
-    }
-
     public List<Review> getReviewList() {
         return reviewList;
     }
@@ -112,12 +114,12 @@ public class Customer {
         reviewList.add(review);
     }
 
-    public void addBook(Book book) {
+   /* public void addBook(Book book) {
         if (bookList == null) {
             bookList = new ArrayList<>();
         }
         bookList.add(book);
-    }
+    }*/
 
     @Override
     public String toString() {

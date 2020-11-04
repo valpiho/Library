@@ -11,11 +11,11 @@ public class Review {
     private int id;
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "book_id")
     private Book bookRev;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
@@ -24,9 +24,18 @@ public class Review {
 
     public Review() {}
 
-    public Review(String description, Customer customer) {
+    public Review(String description, Book bookRev, Customer customer) {
         this.description = description;
+        this.bookRev = bookRev;
         this.customer = customer;
+    }
+
+    public Book getBookRev() {
+        return bookRev;
+    }
+
+    public void setBookRev(Book bookRev) {
+        this.bookRev = bookRev;
     }
 
     public int getId() {

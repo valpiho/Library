@@ -1,21 +1,25 @@
 package org.example.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+@Entity
 public class Author {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
     private Date createdAt;
     private Date editedAt;
 
-
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
     private List<Book> bookList;
 
     public Author() {}
@@ -81,7 +85,7 @@ public class Author {
     }
 
     public String getFullName() {
-        return this.getFirstName() + " " + this.getLastName();
+        return getFirstName() + " " + getLastName();
     }
 
     @Override

@@ -1,7 +1,6 @@
 package org.example.dao;
 
 import org.example.config.HibernateUtils;
-import org.example.entity.Book;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;

@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.dao.BookDAO;
+import org.example.entity.Author;
 import org.example.entity.Book;
 
 
@@ -37,17 +38,22 @@ public class BookPane{
         borderPane.setLeft(bookTableView);
         borderPane.setBottom(hBox);
 
-        // Name Column
+        // Title Column
         TableColumn<Book, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setMinWidth(200);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        // Author Column
+        TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
+        authorColumn.setMinWidth(200);
+        authorColumn.setCellValueFactory(new );
 
         // Description Column
         TableColumn<Book, String> descriptionColumn = new TableColumn<>("Description");
         descriptionColumn.setMinWidth(200);
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        bookTableView.getColumns().addAll(nameColumn, descriptionColumn);
+        bookTableView.getColumns().addAll(nameColumn, authorColumn, descriptionColumn);
 
         // Buttons
         Button buttonCreate = new Button("Create book");

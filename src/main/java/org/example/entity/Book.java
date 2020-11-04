@@ -1,9 +1,9 @@
 package org.example.entity;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
+import org.hibernate.annotations.*;
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,12 +16,11 @@ public class Book {
     private int id;
     private String name;
 
-/*    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
-*/
+
     private String description;
-/*
 
     @OneToOne(mappedBy = "bookBor")
     private Borrowed borrowed;
@@ -36,17 +35,18 @@ public class Book {
 
     private boolean isBorrowed;
 
-    @OneToMany(mappedBy = "BookRev", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bookRev", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Review> reviewList;
-*/
 
     public Book() {}
 
-    public Book(String name, String description) {
+    public Book(String name, Author author, String description) {
         this.name = name;
+        this.author = author;
         this.description = description;
     }
-/*
+
     public Borrowed getBorrowed() {
         return borrowed;
     }
@@ -61,7 +61,7 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
-    }*/
+    }
 
     public int getId() {
         return id;
@@ -87,7 +87,7 @@ public class Book {
         this.description = description;
     }
 
-    /*public Date getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
@@ -125,18 +125,19 @@ public class Book {
         }
         reviewList.add(review);
     }
-*/
+
+
     @Override
     public String toString() {
-        return "Book{" +
+
+        return
                 "id=" + id +
                 ", name='" + name + '\'' +
-//                ", author=" + authorName +
+                ", author=" + author.getFirstName() +
                 ", description='" + description + '\'' +
-                /*", createdAt=" + createdAt +
+                ", createdAt=" + createdAt +
                 ", editedAt=" + editedAt +
                 ", isBorrowed=" + isBorrowed +
-                ", reviewList=" + reviewList +*/
-                '}';
+                ", reviewList=" + reviewList;
     }
 }

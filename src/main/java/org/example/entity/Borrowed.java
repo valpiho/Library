@@ -2,6 +2,8 @@ package org.example.entity;
 
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -14,15 +16,15 @@ public class Borrowed {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "borrowed_by")
-    private Customer customerBor;
+//    @OneToOne
+//    @JoinColumn(name = "borrowed_by")
+//    private Customer customerBor;
 
     @OneToOne
     @JoinColumn(name = "book_id")
     private Book bookBor;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
@@ -37,9 +39,9 @@ public class Borrowed {
     public Borrowed() {
     }
 
-    public Borrowed(Customer customerBor, Book bookBor) {
-        this.customerBor = customerBor;
+    public Borrowed(Book bookBor, Customer customer) {
         this.bookBor = bookBor;
+        this.customer = customer;
     }
 
     public Customer getCustomer() {
@@ -58,13 +60,13 @@ public class Borrowed {
         this.id = id;
     }
 
-    public Customer getCustomerBor() {
-        return customerBor;
-    }
-
-    public void setCustomerBor(Customer customerBor) {
-        this.customerBor = customerBor;
-    }
+//    public Customer getCustomerBor() {
+//        return customerBor;
+//    }
+//
+//    public void setCustomerBor(Customer customerBor) {
+//        this.customerBor = customerBor;
+//    }
 
     public Book getBookBor() {
         return bookBor;
