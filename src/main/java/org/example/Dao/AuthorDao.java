@@ -39,6 +39,7 @@ public class AuthorDao {
     public Author getAuthorName(String name) {
         Session session = HibernateUtil.getSession();
         Author author = session.createQuery("from Author where firstName = :name", Author.class).setParameter("name", name).getSingleResult();
+        session.close();
         return author;
     }
 

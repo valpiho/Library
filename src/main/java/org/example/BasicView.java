@@ -10,12 +10,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.example.Dao.AuthorDao;
 import org.example.Dao.BookDao;
+import org.example.Dao.CustomerDao;
 import org.example.entity.Author;
 import org.example.entity.Book;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.example.entity.Customer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BasicView {
@@ -30,7 +30,7 @@ public class BasicView {
     private Button auCreateBook, auEditBook, auDeleteBook, auGetBook, auGetAllBooks, auGetAllReviews;
 
     @FXML
-    private TextArea auTextAreaForAll;
+    private ListView auTextAreaForAll;
     //authorTab//
 
     //customerTab//
@@ -70,11 +70,58 @@ public class BasicView {
     //registrationTab//
     //FXMLs//
 
-
-//    Session session = HibernateUtil.getSession();
-//    Transaction transaction = null;
     BookDao bookDao = new BookDao();
     AuthorDao authorDao = new AuthorDao();
+    CustomerDao customerDao = new CustomerDao();
+
+    //registrationTab//
+
+    public void addAuthor(ActionEvent event) {
+        String auFirstName = regAuthorFirstName.getText();
+        String auLastName = regAuthorLastName.getText();
+
+        Author author = new Author(auFirstName, auLastName);
+        authorDao.saveAuthor(author);
+    }
+
+    public void getAllAuthors() {
+        List<Author> authors = authorDao.getAllAuthors();
+        ObservableList<Author> list = FXCollections.observableList(authors);
+        regGetAllView.setItems(list);
+    }
+
+    public void addCustomer() {
+        String cusFirstName = regCustomerFirstName.getText();
+        String cusLastName = regCustomerLastName.getText();
+        Customer customer = new Customer(cusFirstName, cusLastName);
+        customerDao.saveCustomer(customer);
+    }
+
+    public void getAllCustomers() {
+        regGetAllView.refresh();
+        List<Customer> customers = customerDao.getAllCustomers();
+        ObservableList<Customer> customers1 = FXCollections.observableList(customers);
+        regGetAllView.setItems(customers1);
+    }
+    //registrationTab//
+
+    //AuthorTab//
+    public void getBooksByAuthorName() {
+        Author author = authorDao.getAuthorName(auNameForGetAllBooksAndReviews.getText());
+        List<Book> list = author.getBookList();
+        ObservableList<Book> list1 = FXCollections.observableList(list);
+        auTextAreaForAll.setItems(list1);
+    }
+
+    public void editBook() {
+        Integer bookID = Integer.parseInt(auBookIdForEdit.getText());
+        String bookName = auBookNameForEdit.getText();
+        String bookDesc = auBookDescForEdit.getText();
+        Book book = bookDao.getBookId(bookID);
+        book.setName(bookName);
+        book.setDescription(bookDesc);
+        bookDao.updateBook(book);
+    }
 
     public void addBook() {
         String bookName = auBookNameForCreate.getText();
@@ -85,37 +132,26 @@ public class BasicView {
         bookDao.saveBook(book);
     }
 
-    public void addAuthor(ActionEvent event) {
-        String auFirstName = regAuthorFirstName.getText();
-        String auLastName = regAuthorLastName.getText();
-
-        Author author = new Author(auFirstName, auLastName);
-        authorDao.saveAuthor(author);
+    public void getBook() {
+        Integer bookId = Integer.parseInt(auBookIdForDeleteOrGet.getText());
+        Book book = bookDao.getBookId(bookId);
+        List<Book> books = new ArrayList<>();
+        books.add(book);
+        ObservableList<Book> bookObservableList = FXCollections.observableList(books);
+        auTextAreaForAll.setItems(bookObservableList);
     }
 
-    public void getAllBooks() {
-        auTextAreaForAll.clear();
-        Author author = authorDao.getAuthorId(Integer.parseInt(auBookAuthorIdForCreate.getText()));
-        List<Book> list = author.getBookList();
-        for( Book b : list) {
-            auTextAreaForAll.appendText(b.toString() + "\n");
-        }
-
+    public void deleteBook() {
+        Integer bookId = Integer.parseInt(auBookIdForDeleteOrGet.getText());
+        Book book = bookDao.getBookId(bookId);
+        bookDao.deleteBook(book);
     }
 
-    public void getBooksByAuthorName() {
-        auTextAreaForAll.clear();
-        Author author = authorDao.getAuthorName(auNameForGetAllBooksAndReviews.getText());
-        List<Book> list = author.getBookList();
-        for( Book b : list) {
-            auTextAreaForAll.appendText(b.toString() + "\n");
-        }
+    public void getAllReviewsAu() {
+        //todo
     }
 
-    public void getAllAuthors() {
-        List<Author> authors = authorDao.getAllAuthors();
-        ObservableList<Author> list = FXCollections.observableList(authors);
-        regGetAllView.setItems(list);
-    }
+    //AuthorTab//
+
 
 }

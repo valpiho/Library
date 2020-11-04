@@ -24,7 +24,7 @@ public class Borrowed {
     @JoinColumn(name = "book_id")
     private Book bookBor;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
