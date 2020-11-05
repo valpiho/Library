@@ -27,6 +27,9 @@ public class Book {
     @OneToOne(mappedBy = "bookBor")
     private Borrowed borrowed;
 
+    @OneToOne(mappedBy = "book")
+    private Returned returned;
+
     @CreationTimestamp
     @Temporal(TemporalType.DATE)
     private Date createdAt;
@@ -47,6 +50,14 @@ public class Book {
         this.name = name;
         this.author = author;
         this.description = description;
+    }
+
+    public Returned getReturned() {
+        return returned;
+    }
+
+    public void setReturned(Returned returned) {
+        this.returned = returned;
     }
 
     public Borrowed getBorrowed() {

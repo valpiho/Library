@@ -30,12 +30,16 @@ public class Customer {
 //    @OneToOne(mappedBy = "customerBor")
 //    private Borrowed borrowed;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "customer")
     private List<Borrowed> bookList;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Review> reviewList;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "reCustomer")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Returned> returned;
 
     public Customer() {}
 
@@ -52,13 +56,23 @@ public class Customer {
         this.bookList = bookList;
     }
 
-//    public Borrowed getBorrowed() {
-//        return borrowed;
-//    }
-//
-//    public void setBorrowed(Borrowed borrowed) {
-//        this.borrowed = borrowed;
-//    }
+
+
+/*    public Borrowed getBorrowed() {
+        return borrowed;
+    }
+
+    public void setBorrowed(Borrowed borrowed) {
+        this.borrowed = borrowed;
+    }*/
+
+    public List<Returned> getReturned() {
+        return returned;
+    }
+
+    public void setReturned(List<Returned> returned) {
+        this.returned = returned;
+    }
 
     public int getId() {
         return id;
@@ -132,6 +146,7 @@ public class Customer {
                 ", editedAt=" + editedAt +
                 ", bookList=" + bookList +
                 ", reviewList=" + reviewList +
+                ", returned=" + returned +
                 '}';
     }
 }

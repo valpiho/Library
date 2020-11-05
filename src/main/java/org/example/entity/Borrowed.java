@@ -16,9 +16,9 @@ public class Borrowed {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @OneToOne
-//    @JoinColumn(name = "borrowed_by")
-//    private Customer customerBor;
+    /*@OneToOne
+    @JoinColumn(name = "borrowed_by")
+    private Customer customerBor;*/
 
     @OneToOne
     @JoinColumn(name = "book_id")
@@ -32,9 +32,9 @@ public class Borrowed {
     @Temporal(TemporalType.DATE)
     private Date borrowedAt;
 
-    @UpdateTimestamp
+    /*@UpdateTimestamp
     @Temporal(TemporalType.DATE)
-    private Date returnedAt;
+    private Date returnedAt;*/
 
     public Borrowed() {
     }
@@ -60,13 +60,13 @@ public class Borrowed {
         this.id = id;
     }
 
-//    public Customer getCustomerBor() {
-//        return customerBor;
-//    }
-//
-//    public void setCustomerBor(Customer customerBor) {
-//        this.customerBor = customerBor;
-//    }
+/*    public Customer getCustomerBor() {
+        return customerBor;
+    }
+
+    public void setCustomerBor(Customer customerBor) {
+        this.customerBor = customerBor;
+    }*/
 
     public Book getBookBor() {
         return bookBor;
@@ -84,11 +84,22 @@ public class Borrowed {
         this.borrowedAt = borrowedAt;
     }
 
-    public Date getReturnedAt() {
+/*    public Date getReturnedAt() {
         return returnedAt;
     }
 
     public void setReturnedAt(Date returnedAt) {
         this.returnedAt = returnedAt;
+    }*/
+
+    @Override
+    public String toString() {
+        return "Borrowed{" +
+                "id=" + id +
+                ", bookBor=" + bookBor.getName() +
+                ", customer=" + customer.getFirstName() +
+                ", borrowedAt=" + borrowedAt +
+//                ", returnedAt=" + returnedAt +
+                '}';
     }
 }

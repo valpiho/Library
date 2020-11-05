@@ -8,14 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import org.example.Dao.AuthorDao;
-import org.example.Dao.BookDao;
-import org.example.Dao.BorrowedDao;
-import org.example.Dao.CustomerDao;
-import org.example.entity.Author;
-import org.example.entity.Book;
-import org.example.entity.Borrowed;
-import org.example.entity.Customer;
+import org.example.Dao.*;
+import org.example.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,15 +31,15 @@ public class BasicView {
 
     //customerTab//
     @FXML
-    private TextField cuBookNameForBorrowAndReturnAndEdit, cuReviewForCreateAndEdit, cuAuthorNameForGetReviewAndReviews,
-                        cuBookNameForDelete, cuIdForAll;
+    private TextField cuBookNameForBorrowAndReturnAndEdit, cuReviewForCreateAndEdit, cuReviewIdForDelete,
+                        cuBookNameForReviews, cuIdForAll;
 
     @FXML
     private Button cuBorrowBook, cuReturnBook, cuCreateReview, cuEditReview, cuGetBookReview, cuGetBooksReview,
                     cuDeleteBookReview;
 
     @FXML
-    private TextArea cuTextAreaForAll;
+    private ListView cuTextAreaForAll;
     //customerTab//
 
     //reviewsTab//
@@ -56,7 +50,7 @@ public class BasicView {
     private Button revCheckForReviews;
 
     @FXML
-    private TextArea revTextAreaForReviews;
+    private ListView revTextAreaForReviews;
     //reviewsTab//
 
     //registrationTab//
@@ -76,6 +70,8 @@ public class BasicView {
     AuthorDao authorDao = new AuthorDao();
     CustomerDao customerDao = new CustomerDao();
     BorrowedDao borrowedDao = new BorrowedDao();
+    ReturnedDao returnedDao = new ReturnedDao();
+    ReviewDao reviewDao = new ReviewDao();
 
     //registrationTab//
 
@@ -165,36 +161,61 @@ public class BasicView {
         borrowedDao.borrowBook(borrowed);
     }
 
+
     public void returnBook() {
         Book book = bookDao.getBookByName(cuBookNameForBorrowAndReturnAndEdit.getText());
-        Customer customer = customerDao.getAllCustomers().get(Integer.parseInt(cuIdForAll.getText()) - 1);
-        Borrowed borrowed = new Borrowed(book, customer);
-        borrowedDao.returned(borrowed);
-       /* List<Borrowed> borroweds = customer.getBookList();
-        borroweds.remove(borrowed.getId());
+        Customer customer = customerDao.getById(Integer.parseInt(cuIdForAll.getText()));
+
+        Borrowed borrowed = book.getBorrowed();
+        int a = 0;
+        for (Borrowed b : customer.getBookList()) {
+            if (b.getBookBor().getName().equals(book.getName())) {
+                break;
+            }
+            a++;
+        }
+        Returned returned = new Returned(book, customer, borrowed.getBorrowedAt());
+        returnedDao.returnBook(returned);
+        List<Borrowed> borroweds = customer.getBookList();
+        borroweds.remove(a);
         customer.setBookList(borroweds);
-        customerDao.updateCustomer(customer);*/
+        customerDao.updateCustomer(customer);
     }
 
     public void createReview() {
-        //todo
+        Book book = bookDao.getBookByName(cuBookNameForBorrowAndReturnAndEdit.getText());
+        Customer customer = customerDao.getById(Integer.parseInt(cuIdForAll.getText()));
+        Review review = new Review(cuReviewForCreateAndEdit.getText(), book, customer);
+        reviewDao.saveReview(review);
     }
 
     public void editReview() {
-        //todo
+        Book book = bookDao.getBookByName(cuBookNameForBorrowAndReturnAndEdit.getText());
+        Customer customer = customerDao.getById(Integer.parseInt(cuIdForAll.getText()));
+        Review review = reviewDao.getByBookNameAndAuthorName(book, customer);
+        reviewDao.updateReview(review);
     }
 
     public void getCustomerReviews() {
-        //todo
+        Customer customer = customerDao.getById(Integer.parseInt(cuBookNameForReviews.getText()));
+        ObservableList<Review> customers = FXCollections.observableList(customer.getReviewList());
+        cuTextAreaForAll.setItems(customers);
     }
 
     public void deleteBookReview() {
-        //todo
+        Review review = reviewDao.getById(Integer.parseInt(cuReviewIdForDelete.getText()));
+        reviewDao.deleteReview(review);
     }
-
-
 
     //CustomerTab//
 
+    //ReviewsTab//
+
+    public void getBookReviews() {
+        Book book = bookDao.getBookByName(revBookNameForReviews.getText());
+        ObservableList<Review> reviews = FXCollections.observableList(book.getReviewList());
+        revTextAreaForReviews.setItems(reviews);
+    }
+    //ReviewsTab//
 
 }

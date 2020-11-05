@@ -1,23 +1,22 @@
 package org.example.Dao;
 
 import org.example.HibernateUtil;
-import org.example.entity.Borrowed;
+import org.example.entity.Book;
 import org.example.entity.Customer;
+import org.example.entity.Review;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
-import java.util.List;
 
-public class CustomerDao {
+public class ReviewDao {
 
-    public void saveCustomer (Customer customer) {
+    public void saveReview (Review review) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = null;
 
         try {
             transaction = session.beginTransaction();
-            session.save(customer);
+            session.save(review);
             transaction.commit();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -29,57 +28,55 @@ public class CustomerDao {
         }
     }
 
-    public List<Customer> getAllCustomers() {
+    public void updateReview (Review review) {
         Session session = HibernateUtil.getSession();
-        List<Customer> customers = session.createQuery("from Customer", Customer.class).list();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            session.update(review);
+            transaction.commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+    }
+
+    public Review getByBookNameAndAuthorName(Book book, Customer customer) {
+        Session session = HibernateUtil.getSession();
+        Review review = session.createQuery("from Review where bookRev = :book and customer = :customer",Review.class )
+                                            .setParameter("book", book).setParameter("customer", customer).getSingleResult();
         session.close();
-        return customers;
+        return review;
     }
 
-    public Customer getById(Integer id) {
+    public void deleteReview (Review review) {
         Session session = HibernateUtil.getSession();
-        Customer customer = session.find(Customer.class, id);
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            session.delete(review);
+            transaction.commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+    }
+
+    public Review getById(Integer id) {
+        Session session = HibernateUtil.getSession();
+        Review review = session.find(Review.class, id);
         session.close();
-        return customer;
+        return review;
     }
 
-    public void updateCustomer(Customer customer) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = null;
-
-        try {
-            transaction = session.beginTransaction();
-            session.update(customer);
-            transaction.commit();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-    }
-
-
-   /* public void returnBook(Borrowed borrowed) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = null;
-
-        try {
-            transaction = session.beginTransaction();
-//            session.createQuery("delete from Customer where bookList = :id", Customer.class).setParameter("id", borrowed);
-            Query query = session.createQuery("delete booklist from Customer where bookList = :id");
-            query.setParameter("id", borrowed);
-            int result = query.executeUpdate();
-            transaction.commit();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-    }*/
 }

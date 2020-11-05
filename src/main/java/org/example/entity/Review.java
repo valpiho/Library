@@ -1,7 +1,9 @@
 package org.example.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,7 +24,12 @@ public class Review {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @CreationTimestamp
+    @Temporal(TemporalType.DATE)
     private Date createdAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.DATE)
     private Date editedAt;
 
     public Review() {}
@@ -86,7 +93,7 @@ public class Review {
         return "Review{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", customer=" + customer +
+                ", customer=" + customer.getFirstName() +
                 ", createdAt=" + createdAt +
                 ", editedAt=" + editedAt +
                 '}';
